@@ -11,7 +11,7 @@ app.use(bodyParser());
 app.use(json());
 
 router.get("/", async (ctx) => {
-	ctx.body = "Hello World!";
+  ctx.body = "Hello World!";
 });
 
 app.use(logger());
@@ -19,5 +19,7 @@ app.use(logger());
 app.use(router.routes());
 
 app.listen(3000, () => {
-	console.log("Server is running on port 3000");
+  console.log("Server is running on port 3000");
 });
+
+export { app }
