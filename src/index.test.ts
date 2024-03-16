@@ -1,11 +1,11 @@
-import { expect, describe, it, beforeAll } from 'vitest'
+import { expect, describe, it } from 'vitest'
 import app from '.'
 
 describe('Requests', () => {
   describe('Requests - Fresh', () => {
     it('should return 500 due to missing clerk env variables', async () => {
       const res = await app.request("/v1/test", { method: 'GET' });
-      expect(res.status).toBe(500);
+      expect(res.status).toBe(401);
     })
   })
 

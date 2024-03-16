@@ -10,7 +10,8 @@
     "dev": "dotenv -e .env.local -- tsx watch src/index.ts",
     "start": "node dist/index.js",
     "build": "tsc",
-    "test": "vitest"
+    "test:ci": "vitest",
+    "test:local": "dotenv -e .env.local -- vitest"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.1",
