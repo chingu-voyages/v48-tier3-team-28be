@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock tsconfig.json src ./
 
-RUN yarn install --frozen-lockfile --ignore-scripts --production  && \
+RUN yarn install --frozen-lockfile --ignore-scripts && \
   yarn run build
 
 FROM base AS runner
