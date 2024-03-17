@@ -1,13 +1,13 @@
-app = "riverbenk-api"
-primary_region = "lhr"
+# fly.toml app configuration file generated for riverbenk-api on 2024-03-17T01:19:52Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'riverbenk-api'
+primary_region = 'lhr'
 
 [build]
-  dockerfile = "./Dockerfile"
-
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 256
+  dockerfile = './Dockerfile'
 
 [http_service]
   internal_port = 3000
@@ -16,7 +16,12 @@ primary_region = "lhr"
   auto_start_machines = true
   min_machines_running = 0
 
-[[http_service.concurrency]]
-  type = "requests"
-  soft_limit = 500
-  hard_limit = 100
+  [http_service.concurrency]
+    type = 'requests'
+    hard_limit = 1000
+    soft_limit = 500
+
+[[vm]]
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256
