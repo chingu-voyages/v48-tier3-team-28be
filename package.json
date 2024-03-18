@@ -1,0 +1,32 @@
+{
+  "name": "v48-tier3-team-28be",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "repository": "https://github.com/chingu-voyages/v48-tier3-team-28be.git",
+  "author": "Chingu Team 23",
+  "license": "MIT",
+  "scripts": {
+    "dev": "dotenv -e .env.local -- tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "test:ci": "vitest",
+    "test:local": "dotenv -e .env.local -- vitest"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.6.1",
+    "@types/node": "^20.11.28",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.2",
+    "vitest": "^1.4.0"
+  },
+  "dependencies": {
+    "@clerk/backend": "^0.38.3",
+    "@hono/clerk-auth": "^1.0.1",
+    "@hono/node-server": "^1.8.2",
+    "@hono/zod-openapi": "^0.9.8",
+    "dotenv-cli": "^7.4.1",
+    "hono": "^4.1.0",
+    "zod": "^3.22.4"
+  }
+}
