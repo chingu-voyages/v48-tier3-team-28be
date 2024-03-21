@@ -13,14 +13,18 @@
     "test:ci": "vitest",
     "test:local": "dotenv -e .env.local -- vitest",
     "db:seed": "supabase seed",
-    "db:reset": "supabase reset",
+    "db:reset": "supabase db reset",
     "db:start": "supabase start",
-    "db:stop": "supabase stop"
+    "db:stop": "supabase stop",
+    "generate:stations": "tsx scripts/generateStationList.mts",
+    "db:migrate:generate:local": "prisma migrate dev --create-only",
+    "db:migrate:apply:local": "prisma migrate dev"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.1",
     "@types/node": "^20.11.28",
     "drizzle-kit": "^0.20.14",
+    "prisma": "^5.11.0",
     "supabase": "^1.150.0",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2",
