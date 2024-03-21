@@ -19,8 +19,8 @@ model station {
   town             String                               @db.VarChar()
   riverName        String                               @map("river_name") @db.VarChar()
   catchmentName    String                               @map("catchment_name") @db.VarChar()
-  datumOffset      Float                                @map("datum_offset")
-  dateOpened       DateTime                             @map("date_opened")
+  datumOffset      Float?                               @map("datum_offset")
+  dateOpened       DateTime                             @map("date_opened") @db.Date()
   location         Unsupported("geometry(Point, 4326)")
   reading          reading[]
 
@@ -32,7 +32,7 @@ model reading {
   qualifier        String   @db.VarChar()
   readingDate      DateTime @map("reading_date") @db.Timestamptz()
   value            Float
-  station          station  @relation(fields: [stationReference], references: [stationReference])
+  station          station  @relation(fields: [stationReference], references: [stationReference], onDelete: Cascade)
 
   @@id([stationReference, readingDate, qualifier])
   @@index([stationReference], name: "reading_station_reference_idx")
