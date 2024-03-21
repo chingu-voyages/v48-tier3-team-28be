@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import stations from '../../stations_generated_at_2024-03-20T21:21:31.494Z.json';
-import readings from '../../readings_generated_at_2024-03-21T01:06:27.958Z.json';
+import readings from '../../readings_generated_at_2024-03-21T22:36:27.552Z.json';
 
 const dbClient = new PrismaClient();
 
