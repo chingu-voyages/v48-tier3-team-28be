@@ -8,8 +8,8 @@ CREATE TABLE "station" (
     "town" VARCHAR NOT NULL,
     "river_name" VARCHAR NOT NULL,
     "catchment_name" VARCHAR NOT NULL,
-    "datum_offset" DOUBLE PRECISION NOT NULL,
-    "date_opened" TIMESTAMP(3) NOT NULL,
+    "datum_offset" DOUBLE PRECISION,
+    "date_opened" DATE NOT NULL,
     "location" geometry(Point, 4326) NOT NULL,
 
     CONSTRAINT "station_pkey" PRIMARY KEY ("station_reference")
@@ -32,7 +32,7 @@ CREATE INDEX "location_idx" ON "station" USING GIST ("location");
 CREATE INDEX "reading_station_reference_idx" ON "reading"("station_reference");
 
 -- AddForeignKey
-ALTER TABLE "reading" ADD CONSTRAINT "reading_station_reference_fkey" FOREIGN KEY ("station_reference") REFERENCES "station"("station_reference") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "reading" ADD CONSTRAINT "reading_station_reference_fkey" FOREIGN KEY ("station_reference") REFERENCES "station"("station_reference") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- CreateHyperTable
-SELECT create_hypertable('reading', 'reading_date', chunk_time_interval => INTERVAL '1 day');
+-- CreateHypertable for TimescaleDB extension
+SELECT create_hypertable('reading', 'reading_date', chunk_time_interval => INTERVAL '12 hours');
