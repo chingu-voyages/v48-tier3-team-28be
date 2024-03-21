@@ -90,12 +90,15 @@ const fetchData = async () => {
 
 const run = async () => {
     const stations = await fetchData();
-    if (stations.length > 0) {
-          console.log(`✅   Found ${stations.length} stations`);
-        await saveDataToFile(stations);
-    } else {
-        console.log('No active stations found or an error occurred.');
+    if (stations.length === 0) {
+        console.log(`❌   No active stations found or an error occurred.`);
+        return 
     }
+
+    console.log(`✅   Found ${stations.length} measures`);
+    await saveDataToFile(stations);
 };
 
 run();
+
+//jafziH-gezci0-hifzij
