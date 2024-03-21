@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import stations from '../stations_generated_at_2024-03-20T21:21:31.494Z.json';
 
 interface Root {
   "@context": string
@@ -49,8 +50,10 @@ const fetchData = async () => {
         const response = await fetch(url);
         const data = await response.json() as Root;
 
+        const validRefsSet = new Set(stations.map(ref => ref.stationReference));
+
         return data.items
-          .filter((item: Item) => item.latestReading && (item.qualifier === 'Stage' || item.qualifier === 'Downstream Stage'))
+          .filter((item: Item) => item.latestReading && (item.qualifier === 'Stage' || item.qualifier === 'Downstream Stage') && validRefsSet.has(item.stationReference))
           .map((item) => ({
               stationReference: item.stationReference,
               qualifier: item.qualifier,
