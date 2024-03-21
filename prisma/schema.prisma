@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+}
+
+model station {
+  stationReference String                               @id @map("station_reference") @db.VarChar()
+  town             String                               @db.VarChar()
+  riverName        String                               @map("river_name") @db.VarChar()
+  catchmentName    String                               @map("catchment_name") @db.VarChar()
+  datumOffset      Float                                @map("datum_offset")
+  dateOpened       DateTime                             @map("date_opened")
+  location         Unsupported("geometry(Point, 4326)")
+  reading          reading[]
+
+  @@index([location], name: "location_idx", type: Gist) // Creating a Gist index for the location field
+}
+
+model reading {
+  stationReference String   @map("station_reference") @db.VarChar()
+  qualifier        String   @db.VarChar()
+  readingDate      DateTime @map("reading_date") @db.Timestamptz()
+  value            Float
+  station          station  @relation(fields: [stationReference], references: [stationReference])
+
+  @@id([stationReference, readingDate, qualifier])
+  @@index([stationReference], name: "reading_station_reference_idx")
+}
