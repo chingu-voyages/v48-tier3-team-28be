@@ -17,6 +17,8 @@
     "db:start": "supabase start",
     "db:stop": "supabase stop",
     "generate:stations": "tsx scripts/generateStationList.mts",
+    "generate:readings": "tsx scripts/generateReadingList.mts",
+    "db:client:generate": "prisma generate",
     "db:migrate:generate:local": "prisma migrate dev --create-only",
     "db:migrate:apply:local": "prisma migrate dev"
   },
@@ -35,6 +37,7 @@
     "@hono/clerk-auth": "^1.0.1",
     "@hono/node-server": "^1.8.2",
     "@hono/zod-openapi": "^0.9.8",
+    "@prisma/client": "5.11.0",
     "dotenv-cli": "^7.4.1",
     "drizzle-orm": "^0.30.4",
     "hono": "^4.1.0",
