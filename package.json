@@ -12,6 +12,7 @@
     "build": "tsc",
     "test:ci": "vitest",
     "test:local": "dotenv -e .env.local -- vitest",
+    "test:gh:test": "act -j 'build' --secret-file .env.local",
     "db:seed": "supabase seed",
     "db:reset": "supabase db reset",
     "db:start": "supabase start",
